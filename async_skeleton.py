@@ -1,7 +1,8 @@
 """
-Basic skeleton for running an asyncio server. The server will exit cleanly when
-all work is done, or after receiving a Ctrl+C or a SIGQUIT (kill -3 <pid>)
-signal.
+Basic skeleton for running an asyncio server.
+
+The server will exit cleanly when all work is done, or after receiving a
+Ctrl+C or a SIGQUIT (kill -3 <pid>) signal.
 """
 
 
