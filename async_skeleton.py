@@ -1,6 +1,7 @@
 """
-Basic skeleton for an indefinitely running asyncio tasks that exits cleanly
-after Ctrl+C or a SIGQUIT (kill -3 <pid>) has been received.
+Basic skeleton for running an asyncio server. The server will exit cleanly when
+all work is done, or after receiving a Ctrl+C or a SIGQUIT (kill -3 <pid>)
+signal.
 """
 
 
@@ -9,18 +10,20 @@ import signal
 import random
 
 
-async def worker1():
-    while True:
+async def worker1(max_jobs=100):
+    for _ in range(max_jobs):
         sleep_time = random.expovariate(1 / 2)
         await asyncio.sleep(sleep_time)
         print(f'worker1 has completed a job which took {sleep_time:.2} sec')
+    print('worker1 has completed all jobs')
 
 
-async def worker2():
-    while True:
+async def worker2(max_jobs=100):
+    for _ in range(max_jobs):
         sleep_time = random.expovariate(1 / 2)
         await asyncio.sleep(sleep_time)
         print(f'worker2 has completed a job which took {sleep_time:.2} sec')
+    print('worker2 has completed all jobs')
 
 
 def cleanup():
