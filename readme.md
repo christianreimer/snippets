@@ -6,3 +6,5 @@ is killed.
 
 **```range_dict.py```** shows how to use bisect to create ranges (buckets) for
 they key values in a dict.
+
+**```checksum.py```** calculates a checksum for a dictionary.
