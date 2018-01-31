@@ -12,11 +12,11 @@ import hashlib
 
 
 def checksum(data):
-    return hashlib.sha1(json.dumps(data, sort_keys=True).encode()).hexdigest()
+    return hashlib.sha1(json.dumps(data, sort_keys=True).encode())
 
 
 def main():
-    data = {'name': 'First Last', 'age': 42, 'choice': False}
+    data = {'name': 'First Last', 'age': 42, 'choices': [False, False, True]}
     print(f'The checksum for {data} is {checksum(data)}')
 
 

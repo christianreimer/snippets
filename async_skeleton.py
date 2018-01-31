@@ -12,16 +12,18 @@ import random
 
 
 async def worker1(max_jobs=100):
+    inverse_desired_mean = 0.5
     for _ in range(max_jobs):
-        sleep_time = random.expovariate(1 / 2)
+        sleep_time = random.expovariate(inverse_desired_mean)
         await asyncio.sleep(sleep_time)
         print(f'worker1 has completed a job which took {sleep_time:.2} sec')
     print('worker1 has completed all jobs')
 
 
 async def worker2(max_jobs=100):
+    inverse_desired_mean = 0.5
     for _ in range(max_jobs):
-        sleep_time = random.expovariate(1 / 2)
+        sleep_time = random.expovariate(inverse_desired_mean)
         await asyncio.sleep(sleep_time)
         print(f'worker2 has completed a job which took {sleep_time:.2} sec')
     print('worker2 has completed all jobs')
