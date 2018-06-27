@@ -8,3 +8,5 @@ is killed.
 they key values in a dict.
 
 **```checksum.py```** calculates a checksum for a dictionary.
+
+**```chunk.py```** breaks a list into smaller chunks for processing.
