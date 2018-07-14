@@ -11,22 +11,16 @@ import signal
 import random
 
 
-async def worker1(max_jobs=100):
-    inverse_desired_mean = 0.5
-    for _ in range(max_jobs):
-        sleep_time = random.expovariate(inverse_desired_mean)
-        await asyncio.sleep(sleep_time)
-        print(f'worker1 has completed a job which took {sleep_time:.2} sec')
-    print('worker1 has completed all jobs')
-
-
-async def worker2(max_jobs=100):
-    inverse_desired_mean = 0.5
-    for _ in range(max_jobs):
-        sleep_time = random.expovariate(inverse_desired_mean)
-        await asyncio.sleep(sleep_time)
-        print(f'worker2 has completed a job which took {sleep_time:.2} sec')
-    print('worker2 has completed all jobs')
+def make_worker(worker_num, max_jobs=100):
+    async def worker():
+        inverse_desired_mean = 0.5
+        for _ in range(max_jobs):
+            sleep_time = random.expovariate(inverse_desired_mean)
+            await asyncio.sleep(sleep_time)
+            print(f'worker{worker_num} has completed a job '
+                  f'which took {sleep_time:.4} sec')
+        print('worker1 has completed all jobs')
+    return worker()
 
 
 def cleanup():
@@ -40,10 +34,14 @@ def main():
     loop.add_signal_handler(signal.SIGINT, cleanup)
     loop.add_signal_handler(signal.SIGQUIT, cleanup)
 
+    workers = []
+    for i in range(10):
+        workers.append(make_worker(i))
+
     print('Ctrl+C to exit')
 
     try:
-        loop.run_until_complete(asyncio.wait((worker1(), worker2())))
+        loop.run_until_complete(asyncio.wait(workers))
     except asyncio.CancelledError:
         pass
 
@@ -52,3 +50,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
