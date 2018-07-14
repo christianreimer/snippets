@@ -12,7 +12,7 @@ import hashlib
 
 
 def checksum(data):
-    return hashlib.sha1(json.dumps(data, sort_keys=True).encode())
+    return f'0x{hashlib.sha1(json.dumps(data, sort_keys=True).encode()).hexdigest()}'
 
 
 def main():
