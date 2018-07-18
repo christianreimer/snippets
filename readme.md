@@ -11,4 +11,4 @@ they key values in a dict.
 
 **```chunk.py```** breaks a list into smaller chunks for processing.
 
-** ``bitmap.py``** contains simple functions to manipulate bitmaps.
+**```bitmap.py```** contains simple functions to manipulate bitmaps.
