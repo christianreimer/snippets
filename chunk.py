@@ -37,21 +37,22 @@ def chunk_grow(lst, chunk_size=10, growth=2):
     while i < l:
         yield lst[i:i+chunk_size]
         i += chunk_size
-        chunk_size = math.floor(chunk_size * growth)
+        chunk_size = int(math.floor(chunk_size * growth))
 
 
 def chunk_rand(lst, min_chunk_size=2, max_chunk_size=10):
     """
-    Return a generator which will yield chunks of lst. Each chunk will be or
+    Return a generator which will yield chunks of lst. Each chunk will be of
     random size within `min_chunk_size` and `max_chunk_size` (the last chunk
     may be shorter than `min_chunk_size`).
     """
 
     if min_chunk_size < 1:
-        raise ValueError('min)_chunk_size must be at least 1')
+        raise ValueError('min_chunk_size must be at least 1')
     
     if min_chunk_size > max_chunk_size:
-        raise ValueError('min_chunk_size must be less than max_chunk_size')
+        raise ValueError(
+            'min_chunk_size must be less than or equal to max_chunk_size')
     
     l = len(lst)
     i = 0
@@ -64,12 +65,16 @@ def chunk_rand(lst, min_chunk_size=2, max_chunk_size=10):
 
 def main():
     lst = list(range(73))
+
+    print('Equal chunks')
     for c in chunk(lst):
         print(c)
     
+    print('\nGrowing chunks')
     for c in chunk_grow(lst, 2, 1.5):
         print(c)
 
+    print('\nRandom chunks')
     for c in chunk_rand(lst, 2, 5):
         print(c)
 
