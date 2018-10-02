@@ -7,12 +7,12 @@ have the correct data.
 """
 
 
-import json
-import hashlib
+import json as j
+import hashlib as h
 
 
 def checksum(data):
-    return f'0x{hashlib.sha1(json.dumps(data, sort_keys=True).encode()).hexdigest()}'
+    return f'0x{h.sha1(j.dumps(data, sort_keys=True).encode()).hexdigest()}'
 
 
 def main():
