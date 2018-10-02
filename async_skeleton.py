@@ -11,15 +11,15 @@ import signal
 import random
 
 
-def make_worker(worker_num, max_jobs=100):
+def make_worker(worker_num, max_jobs=5):
     async def worker():
         inverse_desired_mean = 0.5
-        for _ in range(max_jobs):
+        for job_num in range(max_jobs):
             sleep_time = random.expovariate(inverse_desired_mean)
             await asyncio.sleep(sleep_time)
-            print(f'worker{worker_num} has completed a job '
+            print(f'worker{worker_num} has completed job #{job_num} '
                   f'which took {sleep_time:.4} sec')
-        print('worker1 has completed all jobs')
+        print(f'worker{worker_num} has completed all jobs')
     return worker()
 
 
